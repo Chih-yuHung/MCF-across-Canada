@@ -44,24 +44,26 @@ temp<-vector()   #temporary vector, to store CH4 production
 
 #Calculate CH4 produced and MCF
 for (i in 1:36) {
-  if (Manure.rm[i]==0){
-    if (i == 1){
+ if (i == 1){ 
       VS_ava[i]<-VS_loaded[i]
       VS_con[i]<-VS_ava[i]*f.m[i]
     } else {
+     if (Manure.rm[i]==0){
       VS_ava[i]<-VS_loaded[i]+VS_ava[i-1]-VS_con[i-1]
       VS_con[i]<-VS_ava[i]*f.m[i]
     } 
-  } else {
+  else {
     VS_emp<-(VS_ava[i-1]-VS_con[i-1])*(E_eff/100)
     VS_ava[i]<-VS_loaded[i]+((VS_ava[i-1]-VS_con[i-1])*(1-(E_eff/100)))
     VS_con[i]<-VS_ava[i]*f.m[i]
-  }
+     }
+  }    
   temp[i]<-VS_con[i]*B0
   CH4.potential<-VS_Yr*B0
   CH4_sel<-round(sum(temp[25:36]),3)
   MCF<-round(CH4_sel/CH4.potential,2)
 }
+
 
 #To know the CH4 production for every month
 #print(paste("monthly CH4 in third year",month.abb,round(temp[25:36],1)))

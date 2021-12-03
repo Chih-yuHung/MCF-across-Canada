@@ -47,8 +47,7 @@ for (i in 1:36) {
  if (i == 1){ 
       VS_ava[i]<-VS_loaded[i]
       VS_con[i]<-VS_ava[i]*f.m[i]
-    } else {
-     if (Manure.rm[i]==0){
+    } else if (Manure.rm[i]==0){
       VS_ava[i]<-VS_loaded[i]+VS_ava[i-1]-VS_con[i-1]
       VS_con[i]<-VS_ava[i]*f.m[i]
     } 
@@ -56,8 +55,7 @@ for (i in 1:36) {
     VS_emp<-(VS_ava[i-1]-VS_con[i-1])*(E_eff/100)
     VS_ava[i]<-VS_loaded[i]+((VS_ava[i-1]-VS_con[i-1])*(1-(E_eff/100)))
     VS_con[i]<-VS_ava[i]*f.m[i]
-     }
-  }    
+     }    
   temp[i]<-VS_con[i]*B0
   CH4.potential<-VS_Yr*B0
   CH4_sel<-round(sum(temp[25:36]),3)
